@@ -115,4 +115,4 @@ aws ec2 describe-instance-status --instance-ids <instance-id> --query "InstanceS
 
 # Now You Can Deploy Your APP
 
-[[Deploying Nodejs application to EC2]]
+[[Deploying Nodejs application to EC2]](Deploying_Node_to_Ec2.md)
