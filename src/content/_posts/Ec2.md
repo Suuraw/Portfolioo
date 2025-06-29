@@ -1,5 +1,5 @@
 ---
-id: "aws-ec2-nodejs-deployment"
+id: "Ec2"
 title: "ATS-backend Deployment Guide on AWS EC2 using PM2"
 description: "Step-by-step guide for deploying and managing a Node.js server on AWS EC2 using PM2 process manager"
 date: "2025-05-16"
@@ -105,5 +105,3 @@ You can now safely close the terminal — your server will stay up!
 Access your server at: `http://<your-ec2-ip>:5000/`
 
 **If using HTTPS or reverse proxy (e.g. Nginx), make sure ports and SSL are configured properly.**
-
-![PM2 Dashboard](https://example.com/path-to-your-image.png)

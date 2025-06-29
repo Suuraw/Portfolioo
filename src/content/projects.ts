@@ -11,7 +11,7 @@ const projects: Project[] = [
     title: "ApplySmart",
     description: "ATS based platform which analysis resume and automate job form filling",
     tags: ["Next.js", "MongoDB", "Aws","NodeJs","FireBase","Prisma"],
-    liveLink: "apply-smart-kappa.vercel.app",
+    liveLink: "https://apply-smart-kappa.vercel.app",
     devLink: "https://github.com/Suuraw/ApplySmart",
   },
   {

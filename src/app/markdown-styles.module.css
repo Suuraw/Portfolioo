@@ -36,3 +36,47 @@
 .markdown a {
   @apply underline text-green;
 }
+.markdown {
+  /* You already have Tailwind prose-invert, this is for fallback or enhancements */
+  font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+.markdown pre {
+  background-color: #1e1e2f;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin-bottom: 1rem;
+}
+
+.markdown code {
+  font-size: 0.875rem;
+  background: #1e1e2f;
+  color: #fff;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.markdown pre code {
+  background: none;
+  padding: 0;
+}
+
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.markdown th,
+.markdown td {
+  border: 1px solid #444;
+  padding: 0.5rem;
+  text-align: left;
+}
+.markdown img {
+  @apply rounded-lg shadow-md mx-auto my-6;
+  max-width: 100%;
+  height: auto;
+}
