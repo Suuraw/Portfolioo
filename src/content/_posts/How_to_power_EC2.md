@@ -34,4 +34,4 @@ aws ec2 describe-instance-status --instance-ids i-xxxxxxxxx
 
 # Now Go SSH your server
 
-[[SSH ec2]]
+[[SSH ec2]](SSH_Ec2.md)
