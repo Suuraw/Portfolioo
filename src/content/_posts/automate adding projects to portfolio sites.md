@@ -1,0 +1,313 @@
+---
+id: "automate adding projects to portfolio sites"
+title: "Project section automation"
+description: "Step-by-step guide for setting up the pipeline for automating adding new projects to your portfolio website"
+date: "2025-05-16"
+tags: ["github actions", "GenAI", "CI/CD"]
+---
+
+## Steps
+
+---
+
+### Writing Workflow that does :
+
+    		|
+    		|----> Run script that generates content and saves projects content
+    		|
+    		|----> Manual Trigger
+    		|
+    		|----> Invoke a bot for actions like push and commit changes
+
+#### Code (main.yml)
+
+```yml
+name: Generate Repo description
+
+on:
+  workflow_dispatch: # 📌 For manual trigger
+
+permissions:
+  contents: write  # ✅ Required to allow committing & pushing
+
+jobs:
+  load-projects:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Load Repo Code
+        uses: actions/checkout@v3
+      # 📌 "actions/checkout@v3" automatically assign a token for admin level ops
+      # So remove "Set Remote with Token"
+
+      - name: Setup node js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run loadProjects.js
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: node loadProjects.js
+
+      # - name: Set Remote with Token   -- Provides authorization for push changes
+      #   run: git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+
+      - name: Commit and Push projects.json
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff --cached --quiet || git commit -m "update projects.json"
+    # 📌 diff acts as a if condition which checks for changes
+          git push
+```
+
+---
+
+### Writting scripts for generating and saving content in Json Format
+
+#### Dependencies
+
+-**Octokit** , **GoogleGenAI**
+
+```ts
+import fs from "fs/promises";
+import { Octokit } from "octokit";
+import model from "./genAI.js";
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+const githubToken = process.env.ACCESS_TOKEN;
+const geminiApiKey = process.env.GEMINI_API_KEY;
+if (!geminiApiKey) {
+  console.error("Missing Gemini API Key!");
+  process.exit(1);
+}
+
+const output_path = "src/data/project.json";
+const myModel = new model();
+const octokit = new Octokit({
+  auth: githubToken,
+});
+const headers = {
+  owner: "Suuraw",
+  headers: {
+    "X-GitHub-Api-Version": "2022-11-28",
+  },
+};
+const response = await octokit.request("GET /users/Suuraw/repos", headers);
+let projects_details = [];
+const repo_data = response.data;
+let count = 1;
+for (const obj of repo_data) {
+  const { name, html_url, languages_url } = obj;
+  const languages = await octokit.request(`GET ${languages_url}`, headers);
+  const prompt = `Generate a concise one-para description for a Github repository
+  name of the repo:${name} , repo_link:${html_url} , languages_used:${Object.keys(
+    languages.data
+  )}
+  `;
+  const projectDescrption = await myModel.generateContent(prompt, geminiApiKey);
+  await delay(5000);
+  const project = {
+    repo_name: name,
+    description: projectDescrption,
+    languages: Object.keys(languages.data),
+  };
+  console.log(`Project ${count} :`, project);
+  projects_details.push(project);
+  await fs.writeFile(output_path, JSON.stringify(projects_details, null, 2));
+  count++;
+}
+// console.log("name: ",name);
+// console.log("repo link: ",html_url);
+// console.log("languages used :",Object.keys(languages.data));
+// console.log("\n");
+```
+
+#### GenAI code
+
+```ts
+import { GoogleGenAI } from "@google/genai";
+
+class model {
+  async generateContent(context, apiKey) {
+    const ai = new GoogleGenAI({ apiKey: apiKey });
+    this.context = context;
+    const response = await ai.models.generateContent({
+      model: "gemini-1.5-flash",
+      contents: context,
+      config: {
+        systemInstruction: `Response Format:
+                Description Text
+                `,
+      },
+    });
+    return response.text;
+  }
+}
+export default model;
+```
+
+### Generated and saved details
+
+```json
+[
+  {
+    "repo_name": "Affect-of-Covid-19-on-Job-Professional",
+    "description": "This Jupyter Notebook repository, \"Affect-of-Covid-19-on-Job-Professional,\" analyzes the impact of the COVID-19 pandemic on job markets and professionals.  It utilizes data analysis techniques to explore trends and potential consequences of the pandemic on employment.\n",
+    "languages": ["Jupyter Notebook"]
+  },
+  {
+    "repo_name": "AgroPredict",
+    "description": "AgroPredict is a web application built with TypeScript, CSS, and JavaScript, designed to predict agricultural yields.  The repository provides the source code and resources for this predictive model, offering insights into crop production and potentially assisting farmers in optimizing their yields.\n",
+    "languages": ["TypeScript", "CSS", "JavaScript"]
+  },
+  {
+    "repo_name": "AgroPredict-Frontend",
+    "description": "This repository, `AgroPredict-Frontend`, contains the front-end code for the AgroPredict application. Built using JavaScript, HTML, and CSS, it provides a user-friendly interface for interacting with the AgroPredict platform, allowing users to access and utilize its agricultural prediction functionalities.\n",
+    "languages": ["JavaScript", "HTML", "CSS"]
+  },
+  {
+    "repo_name": "ApplySmart",
+    "description": "ApplySmart (TypeScript, CSS, JavaScript) is a GitHub repository containing a web application designed to simplify and streamline the job application process.  It helps users organize applications, track deadlines, and manage their job search more effectively.\n",
+    "languages": ["TypeScript", "CSS", "JavaScript"]
+  },
+  {
+    "repo_name": "ATS",
+    "description": "ATS is a GitHub repository containing JavaScript and Python code.  The project's specific functionality isn't described in the provided context.\n",
+    "languages": ["JavaScript", "Python"]
+  },
+  {
+    "repo_name": "Aud",
+    "description": "Aud is a web application built with JavaScript, HTML, and CSS, hosted on GitHub at https://github.com/Suuraw/Aud.  It provides [briefly describe the application's core functionality, e.g.,  a user-friendly interface for managing audio files, a platform for collaborative music creation, etc.].\n",
+    "languages": ["JavaScript", "HTML", "CSS"]
+  },
+  {
+    "repo_name": "Band-Name-Generator",
+    "description": "This repository contains a band name generator web application built using JavaScript, EJS, and CSS.  It allows users to generate creative and unique band names based on various input options, offering a fun and easy way to brainstorm potential band names.\n",
+    "languages": ["JavaScript", "EJS", "CSS"]
+  },
+  {
+    "repo_name": "BMI-calculator",
+    "description": "This repository contains a simple Body Mass Index (BMI) calculator built using HTML, CSS, and JavaScript.  The calculator allows users to input their weight and height to quickly determine their BMI and corresponding weight category.\n",
+    "languages": ["CSS", "JavaScript", "HTML"]
+  },
+  {
+    "repo_name": "Book-shop-automation-backend",
+    "description": "This repository, `Book-shop-automation-backend`, provides the backend infrastructure for a book shop automation system.  Built using JavaScript and HTML, it handles crucial functionalities such as inventory management, order processing, and potentially user authentication (depending on implementation details not explicitly stated).  The project aims to streamline book shop operations through automated processes.\n",
+    "languages": ["JavaScript", "HTML"]
+  },
+  {
+    "repo_name": "Clone-it-until-you-know-it",
+    "description": "This GitHub repository, \"Clone-it-until-you-know-it,\" provides a collection of coding projects where users can clone, modify, and learn from existing codebases.  It's a practical resource for improving programming skills through hands-on experience and understanding diverse coding styles and techniques.\n",
+    "languages": []
+  },
+  {
+    "repo_name": "Coindex",
+    "description": "Coindex (https://github.com/Suuraw/Coindex) is a JavaScript project that provides a comprehensive index of various cryptocurrency and blockchain data, offering tools and resources for developers and users to easily access and analyze information from the decentralized finance (DeFi) space.\n",
+    "languages": ["JavaScript"]
+  },
+  {
+    "repo_name": "Dad-Jokes-Extension",
+    "description": "This repository contains the source code for a browser extension that delivers a new, corny dad joke each time it's opened. Built using HTML, CSS, and JavaScript, this extension adds a touch of lighthearted humor to your browsing experience.\n",
+    "languages": ["CSS", "HTML", "JavaScript"]
+  },
+  {
+    "repo_name": "Dashboard-backend-service",
+    "description": "This repository, `Dashboard-backend-service`, houses the backend service for a dashboard application, built using JavaScript.  It provides the core functionalities and APIs necessary to power the dashboard's data retrieval, processing, and presentation.\n",
+    "languages": ["JavaScript"]
+  },
+  {
+    "repo_name": "DoDo-backend",
+    "description": "This repository, `DoDo-backend`, contains the backend server code for the DoDo application, built using JavaScript.  It handles server-side logic, data processing, and API endpoints necessary for the application's functionality.\n",
+    "languages": ["JavaScript"]
+  },
+  {
+    "repo_name": "DoTo-s",
+    "description": "DoTo-s is a simple to-do list application built with JavaScript, CSS, and HTML.  It allows users to create, manage, and track their tasks, providing a clean and intuitive interface for organizing daily activities.\n",
+    "languages": ["JavaScript", "CSS", "HTML"]
+  },
+  {
+    "repo_name": "E-cell-Cohort",
+    "description": "This repository, E-cell-Cohort, uses TypeScript, CSS, JavaScript, and HTML to build a web application.  The exact nature of the application isn't specified in the provided information.\n",
+    "languages": ["TypeScript", "CSS", "JavaScript", "HTML"]
+  },
+  {
+    "repo_name": "E-Cell-Landing-page",
+    "description": "This repository contains the code for a landing page created for E-Cell using HTML, CSS, and JavaScript.  The project aims to provide a visually appealing and informative introduction to E-Cell, showcasing its features and benefits.\n",
+    "languages": ["JavaScript", "HTML", "CSS"]
+  },
+  {
+    "repo_name": "E-Commerse-Full-Stack-Site",
+    "description": "This repository contains the code for a full-stack e-commerce website.  The site allows users to browse products, add items to a cart, and complete purchases.  The project showcases a complete e-commerce solution, demonstrating best practices in front-end and back-end development.  Specific technologies used are not explicitly listed in the provided information.\n",
+    "languages": []
+  },
+  {
+    "repo_name": "Email-template-builder",
+    "description": "This repository, Email-template-builder (https://github.com/Suuraw/Email-template-builder), provides a tool for building customizable email templates using TypeScript, JavaScript, HTML, and CSS.  It simplifies the process of creating responsive and visually appealing emails.\n",
+    "languages": ["TypeScript", "JavaScript", "HTML", "CSS"]
+  },
+  {
+    "repo_name": "Email-Template-Builder-Backend",
+    "description": "This repository, `Email-Template-Builder-Backend`, provides the backend infrastructure for an email template builder application.  Built with JavaScript, it handles functionalities such as template storage, user authentication, and API endpoints to allow seamless integration with a frontend application.\n",
+    "languages": ["JavaScript"]
+  },
+  {
+    "repo_name": "EventEase-Backend",
+    "description": "EventEase-Backend is a Node.js (JavaScript) based backend API for the EventEase application.  This repository contains all server-side logic, data models, and routing for managing events, users, and other application resources.\n",
+    "languages": ["JavaScript"]
+  },
+  {
+    "repo_name": "EventEase-Frontend",
+    "description": "EventEase-Frontend is a user-friendly frontend application built with JavaScript, HTML, and CSS.  This repository contains the client-side code for EventEase, providing an intuitive interface for managing and interacting with events.\n",
+    "languages": ["JavaScript", "HTML", "CSS"]
+  },
+  {
+    "repo_name": "generative-ai-js",
+    "description": "This repository, `generative-ai-js`, provides a collection of JavaScript and TypeScript resources for building generative AI applications.  It offers tools and examples to simplify the process of creating projects involving text generation, image synthesis, and other generative AI tasks.\n",
+    "languages": ["TypeScript", "JavaScript"]
+  },
+  {
+    "repo_name": "JokeZone-API",
+    "description": "JokeZone-API is a web API built with EJS, CSS, and JavaScript, providing a collection of jokes readily accessible for integration into other applications.  The repository offers a convenient and well-structured resource for developers seeking to add humor to their projects.\n",
+    "languages": ["EJS", "CSS", "JavaScript"]
+  },
+  {
+    "repo_name": "Minor-project",
+    "description": "This GitHub repository, Minor-project (https://github.com/Suuraw/Minor-project), contains the code and documentation for a minor project.  Specific details about the project's functionality and the languages used are not provided in the repository's description.\n",
+    "languages": []
+  },
+  {
+    "repo_name": "My-Cheetsheets",
+    "description": "My-Cheetsheets is a GitHub repository containing a collection of concise cheat sheets covering various programming languages and technologies.  It's a valuable resource for quick reference and knowledge consolidation, helping users refresh their skills or learn new concepts efficiently.\n",
+    "languages": []
+  },
+  {
+    "repo_name": "MyFirstReactProject",
+    "description": "This repository, `MyFirstReactProject` (https://github.com/Suuraw/MyFirstReactProject), showcases a beginner's React project built using JavaScript, CSS, and HTML.  It serves as a foundational example demonstrating core React concepts and fundamental web development skills.\n",
+    "languages": ["JavaScript", "CSS", "HTML"]
+  },
+  {
+    "repo_name": "Note-Ninja-Backend",
+    "description": "Note-Ninja-Backend is a Node.js based backend API built with JavaScript, providing robust functionality for a note-taking application.  It handles user authentication, note creation, management, and synchronization, focusing on a clean and efficient architecture for seamless integration with a frontend client.\n",
+    "languages": ["JavaScript"]
+  },
+  {
+    "repo_name": "Note-Ninja-Frontend",
+    "description": "Note-Ninja-Frontend is a front-end web application built with JavaScript, HTML, and CSS.  It provides a user-friendly interface for creating, organizing, and managing notes, enhancing productivity and note-taking efficiency.  The repository contains the complete source code and is open for contributions.\n",
+    "languages": ["JavaScript", "HTML", "CSS"]
+  },
+  {
+    "repo_name": "Portfolio",
+    "description": "This GitHub repository (https://github.com/Suuraw/Portfolio) showcases a personal portfolio website built using HTML, CSS, and JavaScript.  It's a dynamic display of projects and skills, demonstrating proficiency in front-end web development.\n",
+    "languages": ["CSS", "HTML", "JavaScript"]
+  }
+]
+```
