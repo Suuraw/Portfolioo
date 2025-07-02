@@ -11,12 +11,12 @@ export default function About() {
           <div className="text-green">
             <ul className="flex flex-col gap-2">
               <li>
-                🎓 I'm an undergraduate at{" "}
+                🎓 I&apos;m an undergraduate at{" "}
                 <span className="text-blue">KIIT University</span> studying
                 Computer Science and Engineering
               </li>
               <li>
-                💻 I'm passionate about{" "}
+                💻 I&apos;m passionate about{" "}
                 <span className="text-blue">MERN Stack</span> and{" "}
                 <span className="text-blue">DevOps</span>
               </li>
@@ -31,9 +31,9 @@ export default function About() {
           <ul className="list-disc list-inside mt-2 text-purple">
             <li>
               Summer Internship @ IIT Kharagpur - Worked on quantifying
-              renewable energy market risk using proxy index development,,
+              renewable energy market risk using proxy index development,
               working paper
-            </li>
+            </li>{" "}
             <li>Web Development Intern @ KIIT E-Cell</li>
             <li>
               Full Stack Developer @{" "}
