@@ -1,5 +1,5 @@
 ---
-id: "automate adding projects to portfolio sites"
+id: "project-section-automation"
 title: "Automating Portfolio Project Updates"
 description: "A guide to setting up GitHub Actions pipelines for syncing blog posts and generating project descriptions for a portfolio website"
 date: "2025-07-02"
