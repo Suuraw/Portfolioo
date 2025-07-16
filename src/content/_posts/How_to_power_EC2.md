@@ -25,6 +25,16 @@ aws ec2 start-instances --instance-ids i-xxxxxxx
 ```bash
 aws ec2 stop-instances --instance-ids i-xxxxxxxxx
 ```
+- ***Issues while shuting down
+
+```txt
+An error occurred (InvalidInstanceID.NotFound) when calling the StopInstances operation: The instance ID 'i-060819eedcfc9f3b1' does not exist
+```
+
+✅ FIX : SPECIFY THE REGION OF THE DATA CENTER
+```bash
+aws ec2 stop-instances --instance-ids i-060819eedcfc9f3b1 --region us-east-1
+```
 
 - Check status whether machine is **_One_** or **_Off_**
 
