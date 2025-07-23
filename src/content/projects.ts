@@ -8,6 +8,24 @@ interface Project {
 
 const projects: Project[] = [
   {
+  title: "Watch2Learn",
+  description:
+    "A productivity tool that fetches YouTube video transcripts, generates detailed summaries of long-form content, and creates knowledge-testing questionnaires powered by Gemini GenAI—helping users efficiently learn from hours of video content.",
+  tags: ["next-js", "docker", "fastapi", "python", "gemini-genai"],
+  liveLink: "https://www.watch2learn.app/",
+  devLink: "https://github.com/Suuraw/Transcript-backend",
+},
+
+  {
+    title: "ApplySmart",
+    description:
+      "An ATS-optimized platform that analyzes resumes and automates job application form filling, streamlining the job search process for users.",
+    tags: ["next-js", "mongodb", "aws", "node-js", "firebase", "prisma"],
+    liveLink: "https://www.applysmart.me/",
+    devLink: "https://github.com/Suuraw/ApplySmart",
+  },
+  
+  {
     title: "Renewable Energy Market Risk Index",
     description:
       "Built a proxy index to assess renewable energy market risks using generative AI to generate signaling keywords. Integrated into a data pipeline to scrape the Scopus database, with results exported to Excel and visualized for trend analysis.",
@@ -37,14 +55,6 @@ const projects: Project[] = [
     tags: ["github-actions", "generative-ai", "ci-cd", "portfolio-automation"],
     liveLink: null,
     devLink: "https://github.com/Suuraw/project_section_automation_test",
-  },
-  {
-    title: "ApplySmart",
-    description:
-      "An ATS-optimized platform that analyzes resumes and automates job application form filling, streamlining the job search process for users.",
-    tags: ["next-js", "mongodb", "aws", "node-js", "firebase", "prisma"],
-    liveLink: "https://apply-smart-kappa.vercel.app",
-    devLink: "https://github.com/Suuraw/ApplySmart",
   },
   {
     title: "E-Cell Cohort Learning Platform",
