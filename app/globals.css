@@ -1,0 +1,58 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+pre {
+  overflow-x: auto;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background: #1a1a1a;
+  border: 1px solid rgba(0, 255, 0, 0.2);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Code highlighting - Light */
+/* .light pre {
+  background: #ffffff;
+  border-color: rgba(68, 71, 90, 0.2);
+} */
+
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+}
+.light .pre code {
+  color: black;
+}
+/* Selection - Dark */
+::selection {
+  background: rgba(0, 255, 0, 0.3);
+  color: inherit;
+}
+.light ::after {
+  color: wheat;
+}
+.light ::before {
+  color: wheat;
+}
+/* Selection - Light */
+.light ::selection {
+  background: rgba(80, 250, 123, 0.3);
+}
+
+/* Focus styles - Dark */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #00ff00;
+  outline-offset: 2px;
+}
+
+/* Focus styles - Light */
+.light button:focus-visible,
+.light a:focus-visible,
+.light input:focus-visible,
+.light textarea:focus-visible {
+  outline-color: #50fa7b;
+}
+/* Prevent white flash */

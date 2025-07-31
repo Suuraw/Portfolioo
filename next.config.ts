@@ -1,14 +1,15 @@
-// next.config.js
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
-        fs: false, // Prevent fs from being bundled on client
+        fs: false,
       };
     }
     return config;
   },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
