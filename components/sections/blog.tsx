@@ -4,9 +4,9 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Calendar, Tag, FileText } from "lucide-react";
+import { FileText } from "lucide-react";
 import { TerminalWindow } from "@/components/ui/terminal-window";
-import { formatDate, formatUnixTimestamp } from "@/lib/utils";
+import { formatUnixTimestamp } from "@/lib/utils";
 import type { BlogPost } from "@/lib/types"; // <-- Import the type for the prop
 
 // 1. Accept `posts` as a prop

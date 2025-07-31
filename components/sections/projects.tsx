@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { ExternalLink, Github, Folder } from "lucide-react"
-import { TerminalWindow } from "@/components/ui/terminal-window"
-import { projects } from "@/data/projects"
+import { motion } from "framer-motion";
+import { ExternalLink, Github, Folder } from "lucide-react";
+import { TerminalWindow } from "@/components/ui/terminal-window";
+import { projects } from "@/data/projects";
 
 export function Projects() {
   return (
@@ -23,7 +23,7 @@ export function Projects() {
                   user@portfolio:~$
                 </span>
                 <span className="text-white dark:text-white light:text-gray-800 font-semibold">
-                  find ./projects -type f -name "*.project" | wc -l
+                  find ./projects -type f -name `${"*.project"}` | wc -l
                 </span>
               </div>
               <div className="pl-4 text-cyan-400 dark:text-cyan-400 light:text-cyan-600 font-semibold">
@@ -33,7 +33,9 @@ export function Projects() {
                 <span className="text-green-400 dark:text-green-400 light:text-green-600 font-bold">
                   user@portfolio:~$
                 </span>
-                <span className="text-white dark:text-white light:text-gray-800 font-semibold">ls -la ./projects/</span>
+                <span className="text-white dark:text-white light:text-gray-800 font-semibold">
+                  ls -la ./projects/
+                </span>
               </div>
             </div>
           </TerminalWindow>
@@ -64,7 +66,9 @@ export function Projects() {
 
                   {/* Terminal Command */}
                   <div className="text-sm mb-2 font-mono">
-                    <span className="text-green-400 dark:text-green-400 light:text-green-600">user@projects:~$</span>
+                    <span className="text-green-400 dark:text-green-400 light:text-green-600">
+                      user@projects:~$
+                    </span>
                     <span className="text-cyan-400 dark:text-cyan-400 light:text-cyan-600 ml-2">
                       {project.title.toLowerCase().replace(/\s+/g, "-")} --start
                     </span>
@@ -124,5 +128,5 @@ export function Projects() {
         </div>
       </div>
     </section>
-  )
+  );
 }

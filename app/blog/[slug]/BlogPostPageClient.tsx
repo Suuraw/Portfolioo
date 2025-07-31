@@ -6,7 +6,6 @@ import Link from "next/link";
 import { TerminalWindow } from "@/components/ui/terminal-window";
 import { markdownToHtml, formatDate } from "@/lib/utils";
 import type { BlogPost } from "@/lib/types";
-import markdownStyles from "../../markdown-styles.module.css";
 export default function BlogPostPageClient({ post }: { post: BlogPost }) {
   const [htmlContent, setHtmlContent] = useState<string | null>(null);
 

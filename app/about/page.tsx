@@ -60,7 +60,7 @@ export default function AboutPage() {
                   sujay@portfolio:~$
                 </span>
                 <span className="text-white font-semibold">
-                  echo "Welcome to my project showcase"
+                  echo `${"Welcome to my project showcase"}`
                 </span>
               </div>
               <div className="pl-4 text-amber-400 font-semibold">

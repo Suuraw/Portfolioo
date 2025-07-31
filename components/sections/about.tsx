@@ -99,7 +99,7 @@ export function About() {
                     {skills.reduce((acc, skill) => acc + skill.items.length, 0)}{" "}
                     packages
                   </div>
-                  {skills.map((skill, index) => (
+                  {skills.map((skill) => (
                     <div
                       key={skill.category}
                       className="text-cyan-400 dark:text-cyan-400 light:text-cyan-600 font-mono"
@@ -141,7 +141,7 @@ export function About() {
                   </div>
 
                   <div className="space-y-2">
-                    {skill.items.map((item, itemIndex) => (
+                    {skill.items.map((item) => (
                       <div key={item} className="flex items-center space-x-2">
                         <span className="text-green-400 dark:text-green-400 light:text-green-600 font-bold">
                           →

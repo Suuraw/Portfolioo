@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+// import { motion } from "framer-motion";
 import { Blog } from "@/components/sections/blog";
 import { TerminalWindow } from "@/components/ui/terminal-window";
 import { getAllPosts } from "@/lib/api";
@@ -17,7 +17,7 @@ export default function BlogPage() {
             <div className="flex items-center space-x-2">
               <span className="text-terminal-text-secondary">$</span>
               <span className="text-terminal-text">
-                echo "Welcome to my technical blog"
+                echo `${"Welcome to my technical blog"}`
               </span>
             </div>
             <div className="pl-4 text-terminal-text/80">
