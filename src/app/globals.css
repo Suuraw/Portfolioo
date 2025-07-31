@@ -19,3 +19,51 @@
 html {
   @apply bg-background;
 }
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+/* Hide native eye icon in WebKit browsers (iOS/Safari/Chrome Mobile) */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+
+input::-webkit-credentials-auto-fill-button,
+input::-webkit-password-toggle-button {
+  display: none;
+}
+
+/* Syntax highlighting for code blocks */
+pre code .hljs-comment,
+pre code .comment {
+  color: #6a9955 !important; /* Green (VSCode style) */
+  font-weight: bold;
+}
+
+pre code .hljs-keyword {
+  color: #569cd6 !important; /* Blue (VSCode style) */
+  font-weight: normal;
+}
+
+pre code .hljs-string {
+  color: #ce9178 !important; /* Reddish (VSCode style) */
+  font-weight: normal;
+}
+
+pre code .hljs-built_in {
+  color: #4ec9b0 !important; /* Cyan (VSCode style for built-ins like print) */
+  font-weight: normal;
+}
+
+pre code .hljs-title,
+pre code .hljs-title.function_ {
+  color: #dcdcaa !important; /* Yellow (VSCode style for function names) */
+  font-weight: normal;
+}
+
+/* Fallback for any comment-like classes */
+pre code [class*="comment"] {
+  color: #6a9955 !important;
+  font-weight: bold;
+}

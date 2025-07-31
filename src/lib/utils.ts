@@ -21,5 +21,7 @@ export async function markdownToHtml(markdown: string) {
     .use(rehypeHighlight) // safe, lightweight syntax highlighter
     .use(rehypeStringify) // convert HTML AST to string
     .process(markdown);
+
+  console.log(result);
   return result.toString();
 }

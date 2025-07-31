@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Terminal, User, Code, BookOpen } from "lucide-react"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import Home from "@/components/sections/Home"
-import About from "@/components/sections/About"
-import Projects from "@/components/sections/Projects"
+import { useState } from "react";
+import { Terminal, User, Code, BookOpen } from "lucide-react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import Home from "@/components/sections/Home";
+import About from "@/components/sections/About";
+import Projects from "@/components/sections/Projects";
 
 export default function Portfolio() {
-  const [selectedSection, setSelectedSection] = useState("home")
+  const [selectedSection, setSelectedSection] = useState("home");
 
   const tabs = {
     home: {
@@ -28,25 +28,14 @@ export default function Portfolio() {
     blog: {
       title: "blog",
       content: undefined,
-    }
-  }
+    },
+  };
 
   return (
     <div className="min-h-screen bg-background text-purple-blue p-4 md:p-8 font-mono">
-      {/* ASCII Art Banner */}
-      {/* <pre className="text-green text-xs md:text-sm lg:text-base whitespace-pre overflow-x-auto">
-        {`
-█████╗ ██╗     ███████╗██╗  ██╗ █████╗     ███████╗ █████╗ ███████╗██╗ ██████╗ 
-██╔══██╗██║     ██╔════╝╚██╗██╔╝██╔══██╗    ██╔════╝██╔══██╗╚══███╔╝██║██╔═══██╗
-███████║██║     █████╗   ╚███╔╝ ███████║    █████╗  ███████║  ███╔╝ ██║██║   ██║
-██╔══██║██║     ██╔══╝   ██╔██╗ ██╔══██║    ██╔══╝  ██╔══██║ ███╔╝  ██║██║   ██║
-██║  ██║███████╗███████╗██╔╝ ██╗██║  ██║    ██║     ██║  ██║███████╗██║╚██████╔╝
-╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝ ╚═════╝ 
-`}
-      </pre> */}
       <div className="flex flex-row flex-wrap sm:justify-start justify-center">
         <pre className="text-green text-xs md:text-sm lg:text-base whitespace-pre overflow-x-auto">
-        {`
+          {`
 ███████╗ ██╗   ██╗      ██╗  █████╗  ██╗   ██╗
 ██╔════╝ ██║   ██║      ██║ ██╔══██╗ ╚██╗ ██╔╝
 ███████╗ ██║   ██║      ██║ ███████║  ╚████╔╝ 
@@ -56,9 +45,9 @@ export default function Portfolio() {
                                           
                                           
 `}
-      </pre>
-      <pre className="text-green text-xs md:text-sm lg:text-base whitespace-pre overflow-x-auto">
-        {`
+        </pre>
+        <pre className="text-green text-xs md:text-sm lg:text-base whitespace-pre overflow-x-auto">
+          {`
       ██╗  ██╗ ██╗   ██╗ ███╗   ███╗  █████╗  ██████╗ 
       ██║ ██╔╝ ██║   ██║ ████╗ ████║ ██╔══██╗ ██╔══██╗
       █████╔╝  ██║   ██║ ██╔████╔██║ ███████║ ██████╔╝
@@ -70,7 +59,7 @@ export default function Portfolio() {
                                                             
                                                             
 `}
-      </pre>
+        </pre>
       </div>
 
       {/* Navigation */}
@@ -85,7 +74,9 @@ export default function Portfolio() {
         </Button>
         <Button
           variant="ghost"
-          className={`gap-2 ${selectedSection === "about" ? "text-purple" : ""}`}
+          className={`gap-2 ${
+            selectedSection === "about" ? "text-purple" : ""
+          }`}
           onClick={() => setSelectedSection("about")}
         >
           <User className="w-4 h-4" />
@@ -93,7 +84,9 @@ export default function Portfolio() {
         </Button>
         <Button
           variant="ghost"
-          className={`gap-2 ${selectedSection === "projects" ? "text-purple" : ""}`}
+          className={`gap-2 ${
+            selectedSection === "projects" ? "text-purple" : ""
+          }`}
           onClick={() => setSelectedSection("projects")}
         >
           <Code className="w-4 h-4" />
@@ -119,13 +112,9 @@ export default function Portfolio() {
         {selectedSection === "about" && tabs.about.content}
 
         {selectedSection === "projects" && (
-          <div className="space-y-6">
-            {tabs.projects.content}
-          </div>
+          <div className="space-y-6">{tabs.projects.content}</div>
         )}
       </motion.div>
     </div>
-  )
+  );
 }
-
-
