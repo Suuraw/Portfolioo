@@ -94,7 +94,7 @@ export const metadata: Metadata = {
       "Full-stack developer and DevOps enthusiast specializing in modern web technologies. Expert in React, Next.js, Node.js, Linux, and cloud infrastructure.",
     images: [
       {
-        url: "https://avatars.githubusercontent.com/u/126287693?s=400&v=4",
+        url: "https://avatars.githubusercontent.com/u/126287693?s=100&v=4",
         width: 400,
         height: 400,
         alt: "Sujay Kumar - Full-Stack Developer & DevOps Enthusiast",
