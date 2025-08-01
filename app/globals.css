@@ -11,10 +11,10 @@ pre {
 }
 
 /* Code highlighting - Light */
-/* .light pre {
+.light pre {
   background: #ffffff;
   border-color: rgba(68, 71, 90, 0.2);
-} */
+}
 
 code {
   font-family: var(--font-mono);
@@ -33,6 +33,9 @@ code {
 }
 .light ::before {
   color: wheat;
+}
+.light .hljs {
+  color: black;
 }
 /* Selection - Light */
 .light ::selection {
