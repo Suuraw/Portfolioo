@@ -7,22 +7,31 @@ import { Code, Server, Globe, Cpu } from "lucide-react";
 const skills = [
   {
     category: "Frontend",
-    items: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    items: ["React", "Next.js", "TypeScript", "JavaScript", "Tailwind CSS"],
     icon: Globe,
   },
   {
     category: "Backend",
-    items: ["Node.js", "Python", "PostgreSQL", "MongoDB"],
+    items: [
+      "Java",
+      "Node.js",
+      "Python",
+      "PostgreSQL",
+      "MongoDB",
+      "Firebase",
+      "Supabase",
+      "Python",
+    ],
     icon: Server,
   },
   {
     category: "DevOps",
-    items: ["Docker", "AWS", "GitHub Actions", "Linux"],
+    items: ["Docker", "AWS", "GitHub Actions", , "GCP", "CI-CD", "CloudFlare"],
     icon: Cpu,
   },
   {
     category: "Tools",
-    items: ["Git", "VS Code", "Figma", "Postman"],
+    items: ["Git", "Figma", "Postman", "Prisma"],
     icon: Code,
   },
 ];
@@ -78,7 +87,7 @@ export function About() {
                     Uptime:
                   </span>{" "}
                   <span className="text-white dark:text-white light:text-gray-800">
-                    5+ years in software development
+                    2+ years in software development
                   </span>
                 </div>
               </div>

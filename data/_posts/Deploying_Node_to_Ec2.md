@@ -8,9 +8,9 @@ tags: ["aws", "ec2", "nodejs", "pm2", "deployment"]
 
 ## Prerequisites
 
-- [[Setup AWS cli first]](Setup_AWS_cli.md)
-- [[Power on Ec2 Server]](How_to_power_EC2.md)
-- [[SSH your Ec2]](SSH_Ec2.md)
+- [[Setup AWS cli first]](https://sujay.is-a.dev/blog/Setup_AWS_cli)
+- [[Power on Ec2 Server]](https://sujay.is-a.dev/blog/How_to_power_EC2)
+- [[SSH your Ec2]](https://sujay.is-a.dev/blog/SSH_Ec2)
 
 ### Update the system
 
@@ -98,4 +98,4 @@ npm start
 
 ## Simon You Can Go Back
 
-[[SSH ec2]](SSH_Ec2.md)
+[[SSH ec2]](https://sujay.is-a.dev/blog/SSH_Ec2)

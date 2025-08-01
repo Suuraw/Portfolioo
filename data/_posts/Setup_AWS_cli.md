@@ -163,4 +163,4 @@ aws configure list
 
 # NOW
 
-[[Power on my ec2 machine]](How_to_power_EC2.md)
+[[Power on my ec2 machine]](https://sujay.is-a.dev/blog/How_to_power_EC2)

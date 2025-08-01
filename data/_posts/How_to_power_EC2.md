@@ -8,7 +8,7 @@ tags: ["aws-cli", "ec2"]
 
 ## Prerequisites
 
-[[Setup AWS cli for SSH]](Setup_AWS_cli.md)
+[[Setup AWS cli for SSH]](https://sujay.is-a.dev/blog/Setup_AWS_cli)
 
 ---
 
@@ -34,4 +34,4 @@ aws ec2 describe-instance-status --instance-ids i-xxxxxxxxx
 
 # Now Go SSH your server
 
-[[SSH ec2]](SSH_Ec2.md)
+[[SSH ec2]](https://sujay.is-a.dev/blog/SSH_Ec2)

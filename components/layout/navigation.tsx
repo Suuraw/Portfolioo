@@ -26,7 +26,7 @@ export function Navigation() {
           <Link href="/" className="flex items-center space-x-2 group">
             <Terminal className="w-6 h-6 text-terminal-text dark:text-terminal-text light:text-light-accent group-hover:text-terminal-text-secondary dark:group-hover:text-terminal-text-secondary light:group-hover:text-light-accent transition-colors" />
             <span className="font-mono font-bold text-terminal-text dark:text-terminal-text light:text-light-text group-hover:text-terminal-text-secondary dark:group-hover:text-terminal-text-secondary light:group-hover:text-light-accent transition-colors">
-              ~/portfolio
+              ~/Sujay
             </span>
           </Link>
 

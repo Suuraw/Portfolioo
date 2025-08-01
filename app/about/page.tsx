@@ -64,7 +64,7 @@ export default function AboutPage() {
                 </span>
               </div>
               <div className="pl-4 text-amber-400 font-semibold">
-                Showcasing full-stack applications, AI tools, and developer
+                Showcasing full-stack applications, AI Usecases, and developer
                 utilities
               </div>
 

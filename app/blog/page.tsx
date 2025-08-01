@@ -21,7 +21,7 @@ export default function BlogPage() {
               </span>
             </div>
             <div className="pl-4 text-terminal-text/80">
-              Sharing insights on development, Linux, and technology
+              Sharing insights on development, my works, and technology
             </div>
           </div>
         </TerminalWindow>

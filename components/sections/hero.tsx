@@ -62,7 +62,7 @@ export function Hero() {
                     layout // Smooth layout transition for this section
                   >
                     <TypingAnimation
-                      text="Full Stack Developer | Linux Enthusiast | Open Source Contributor"
+                      text="Full Stack Developer | Devops Enthusiast | Java Developer"
                       speed={30}
                       onComplete={() => setShowSecondLine(true)}
                       className="text-cyan-400 dark:text-cyan-400 light:text-cyan-600 font-semibold"
@@ -89,14 +89,8 @@ export function Hero() {
                       />
                     </div>
                     <div className="pl-4 text-amber-400 dark:text-amber-400 light:text-amber-600 font-medium">
-                      <p>
-                        Building scalable web applications with modern
-                        technologies.
-                      </p>
-                      <p>
-                        Passionate about clean code, system architecture, and
-                        developer tools.
-                      </p>
+                      <p>Love to build technical tools that people can use.</p>
+                      <p>Passionate about being a great Developer!</p>
                     </div>
                   </motion.div>
                 )}

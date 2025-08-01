@@ -16,8 +16,8 @@ This guide provides steps to configure the AWS CLI and perform operations like c
 
 ### For Windows
 
-- [[Setup AWS cli for SSH]](Setup_AWS_cli.md)
-- [[Power on my ec2 machine]](How_to_power_EC2.md)
+- [[Setup AWS cli for SSH]](https://sujay.is-a.dev/blog/Setup_AWS_cli)
+- [[Power on my ec2 machine]](https://sujay.is-a.dev/blog/How_to_power_EC2)
 
 ### Ensure SSH Key Pair:
 
@@ -62,7 +62,7 @@ aws ec2 describe-instances --query "Reservations[*].Instances[*].[InstanceId,Pub
 
 ## EC2 Instance Operations
 
-[[Power on my ec2 machine]](How_to_power_EC2.md)
+[[Power on my ec2 machine]](https://sujay.is-a.dev/blog/How_to_power_EC2)
 
                             OR
 
@@ -115,4 +115,4 @@ aws ec2 describe-instance-status --instance-ids <instance-id> --query "InstanceS
 
 # Now You Can Deploy Your APP
 
-[[Deploying Nodejs application to EC2]](http://localhost:3000/blog/Deploying_Node_to_Ec2)
+[[Deploying Nodejs application to EC2]](https://sujay.is-a.dev/blog/Deploying_Node_to_Ec2)
