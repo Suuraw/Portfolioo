@@ -47,6 +47,7 @@ module.exports = {
         type: "type 3s steps(40, end)",
         "fade-in": "fade-in 0.5s ease-out",
         "slide-up": "slide-up 0.5s ease-out",
+        "slow-bounce": "bounce 1s infinite",
       },
       keyframes: {
         "cursor-blink": {

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { About } from "@/components/sections/about";
 import { TerminalWindow } from "@/components/ui/terminal-window";
 import { Github, Linkedin, Mail, ExternalLink } from "lucide-react";
-
+import Stats from "@/components/layout/stats";
 export default function AboutPage() {
   const socialLinks = [
     {
@@ -176,7 +176,7 @@ export default function AboutPage() {
           </TerminalWindow>
         </motion.div>
       </div>
-
+      <Stats />
       <About />
     </div>
   );
